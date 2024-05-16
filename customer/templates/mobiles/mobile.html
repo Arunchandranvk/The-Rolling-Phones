@@ -1,0 +1,61 @@
+{% extends 'userhome.html' %}
+{% block user %}
+<div  class="navbar  row navbar-light  ml-1 mt-1 " style="background-color: white;border-radius: 0.75rem;width: 99%;;">
+              <!-- <a href="{% url 'uh'%}">All</a> -->
+           
+              
+              <a href="" style="text-decoration: none;color: black;font-weight: bold;">
+                <img src="{% static 'images/lap.png' %}" alt="" height="35px" width="35px">Laptop</a>
+              <a href="{% url 'mob' %}" style="text-decoration: none;color: black;font-weight: bold;">
+                <img src="{% static 'images/mob.png' %}" alt="" height="35px" width="35px">Mobiles</a>
+              <a href="" style="text-decoration: none;color: black;font-weight: bold;">
+                <img src="{% static 'images/cloth.png' %}" alt="" height="35px" width="35px">Fashion</a>
+              <a href="" style="text-decoration: none;color: black;font-weight: bold;">
+                <img src="{% static 'images/book.png' %}" alt="" height="35px" width="35px">Books</a>
+              <a href="" style="text-decoration: none;color: black;font-weight: bold;">
+                <img src="{% static 'images/furn.png' %}" alt="" height="35px" width="35px">Furnitures</a>
+              <a href="" style="text-decoration: none;color: black;font-weight: bold;">
+                <img src="{% static 'images/toy.png' %}" alt="" height="35px" width="35px">Toys</a>
+              <a href="" style="text-decoration: none;color: black;font-weight: bold;">
+                <img src="{% static 'images/hom.png' %}" alt="" height="35px" width="35px">Home Appliances</a>
+             
+           
+            </div> 
+ <div class="row" style="width: 100%;">
+              {% for i in data %}
+              <div class="col-lg-3 " >
+                <div class="card mt-2 ml-1">         
+                  <div class="card card-body">
+                    <h4 class="card-title text-center">{{i.productname}}</h4>
+                    <a class=""  href="{% url 'buy' i.id %}" role="button" >
+                      <img src="{{ i.image.url }}" class="card-img-top" alt="..." height="200px" width="300px">
+                      
+                    </a>
+                    <h5 class="card-title text-center">{{i.model}}</h5>
+                      <div class="row">
+                        <div class="col">
+                          <h5 class="card-text  text-center " style="font-family: Arial, Helvetica, sans-serif;font-weight: bold;color: green;"  ><span class="material-symbols-outlined">
+                            currency_rupee
+                            </span>{{i.price}}</h5>
+                        </div>
+                        <div class="col">
+                          {% if i.orginalprice %}
+                          <h5 class="card-text  text-center  " style="font-family: Arial, Helvetica, sans-serif;font-weight:bold;text-decoration: line-through;"  ><span class="material-symbols-outlined">
+                            currency_rupee
+                            </span>{{i.orginalprice}}</h5>
+                            {% endif %}
+                        </div>
+                      </div>
+                      <div class="row mt-2">
+                        
+                        <div class="col">  <a href="{% url 'acart' i.id  %}" class="btn btn-block btn-info">Cart</a></div>
+                        <div class="col"> <a href="{% url 'buy' i.id %}" class="btn btn-success btn-block">Buy</a></div>
+                      </div>
+                     
+                     
+                  </div>         
+                  </div>
+                  </div>  
+                {% endfor %} 
+                </div>
+{% endblock user %}

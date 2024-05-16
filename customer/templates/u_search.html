@@ -1,0 +1,52 @@
+{% extends 'userhome.html' %}
+{% block user %}
+<div  class="navbar  row navbar-light  ml-1 mt-1 " style="background-color: white;border-radius: 0.75rem;width: 99%;;">
+  <!-- <a href="{% url 'uh'%}">All</a> -->
+  {% for i in categ %}
+  
+  <a href="" style="text-decoration: none;color: black;font-weight: bold;"><img src="{{i.img.url}}" alt="" height="35px" width="35px"> {{i.name}}</a>
+  {% endfor %}
+</div> 
+<div class="row" style="width: 100%;">
+    {% for i in data %}
+    <div class="col-lg-3 " >
+      <div class="card mt-2 ml-1">         
+        <div class="card card-body">
+          <h4 class="card-title text-center">{{i.productname}}</h4>
+          <a class=""  href="{% url 'buy' i.id %}" role="button" >
+            <img src="{{ i.image.url }}" class="card-img-top" alt="..." height="200px" width="250px">
+            
+          </a>
+          <h5 class="card-title text-center">{{i.model}}</h5>
+        <!-- <div class="collapse" id="j{{i.id}}">
+          <ul class="list-group list-group-flush">
+           
+            <li class="list-group-item">Ram :{{i.ram}}GB</li>
+            <li class="list-group-item">Rom :{{i.rom}}GB</li>
+            <li class="list-group-item"> </li> 
+          </ul>
+          </div> -->
+          <!-- <div class="card-body"> -->
+            <div class="row">
+              <div class="col">
+                <h5 class="card-text  text-center " style="font-family: Arial, Helvetica, sans-serif;font-weight: bold;color: green;"  ><span class="material-symbols-outlined">
+                  currency_rupee
+                  </span>{{i.price}}</h5>
+              </div>
+              <div class="col">
+                {% if i.orginalprice %}
+                <h5 class="card-text  text-center  " style="font-family: Arial, Helvetica, sans-serif;font-weight:bold;text-decoration: line-through;"  ><span class="material-symbols-outlined">
+                  currency_rupee
+                  </span>{{i.orginalprice}}</h5>
+                  {% endif %}
+              </div>
+            </div>
+            
+          <!-- </div> -->
+        </div>         
+        </div>
+        </div>  
+      {% endfor %} 
+      </div>
+
+{% endblock user %}
