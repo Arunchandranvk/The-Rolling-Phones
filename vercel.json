@@ -6,6 +6,14 @@
         "config": {
           "maxLambdaSize": "15mb",
           "runtime": "python3.9"
+        },
+        "functions": {  
+          "build": {
+            "runtime": "python3.9",
+            "memory": 1024,
+            "includeFiles": ["./build.sh"],  
+            "sh": "./build.sh"  
+          }
         }
       }
     ],
@@ -14,6 +22,6 @@
         "src": "/(.*)",
         "dest": "onlinemobilestore/wsgi.py"
       }
-    ],
-    "command": "./build.sh" 
+    ]
   }
+  
