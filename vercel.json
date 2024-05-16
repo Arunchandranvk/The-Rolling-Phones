@@ -6,7 +6,8 @@
         "config": {
           "maxLambdaSize": "15mb",
           "runtime": "python3.9"
-        }
+        },
+        "command": "./build.sh"  
       }
     ],
     "routes": [
@@ -14,9 +15,6 @@
         "src": "/(.*)",
         "dest": "onlinemobilestore/wsgi.py"
       }
-    ],
-    "build": {
-      "command": "./build.sh"
-    }
+    ]
   }
   
