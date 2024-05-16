@@ -76,16 +76,27 @@ WSGI_APPLICATION = 'onlinemobilestore.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'store',
-        'USER': 'root',
-        'PASSWORD': 'root',
-        'HOST':'localhost',
-        'PORT':'3306',
+import os
+
+# Determine if the application is running on Vercel
+IS_VERCEL = 'VERCEL' in os.environ
+
+if IS_VERCEL:
+    # Use the `/tmp` directory for SQLite database in Vercel environment
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join('/tmp', 'db.sqlite3'),
+        }
     }
-}
+else:
+    # Default SQLite configuration for local development
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
 
 
 # Password validation

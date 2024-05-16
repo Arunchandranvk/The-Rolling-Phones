@@ -1,14 +1,27 @@
-{
-    "builds": [{
-      "src": "onlinemobilestore/wsgi.py",
-      "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
-    }],
+
+  
+  {
+    "builds": [
+      {
+        "src": "manage.py",
+        "use": "@vercel/python",
+        "config": { "maxLambdaSize": "15mb" }
+      }
+    ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "onlinemobilestore/wsgi.py"
+        "dest": "/manage.py"
       }
-    ]
+    ],
+    "env": {
+      "DJANGO_SETTINGS_MODULE": "onlinemobilestore.settings"
+    },
+    "build": {
+      "env": {
+        "DJANGO_SETTINGS_MODULE": "onlinemobilestore.settings"
+      },
+      "command": "python manage.py migrate"
+    }
   }
   
