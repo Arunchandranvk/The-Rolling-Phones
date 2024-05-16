@@ -25,4 +25,6 @@ urlpatterns = [
     path('store/',include("store.urls")),
     path('customer/',include("customer.urls")),
     path('',LogView.as_view(),name="h")
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+] 
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 

@@ -1,25 +1,27 @@
 {
+    "version": 2,
     "builds": [
       {
         "src": "onlinemobilestore/wsgi.py",
         "use": "@vercel/python",
+        "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+      },
+      {
+        "src": "build_files.sh",
+        "use": "@vercel/static-build",
         "config": {
-          "maxLambdaSize": "15mb",
-          "runtime": "python3.9"
+          "distDir": "staticfiles_build"
         }
       }
     ],
     "routes": [
       {
+        "src": "/static/(.*)",
+        "dest": "/static/$1"
+      },
+      {
         "src": "/(.*)",
         "dest": "onlinemobilestore/wsgi.py"
       }
-    ],
-    "build": {
-      "env": {
-        "DJANGO_SETTINGS_MODULE": "onlinemobilestore.settings"
-      },
-      "command": "./build.sh"
-    }
+    ]
   }
-  

@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-902=sbh)bsm8xiip7ui95@t1$^*iue+4ev1oe%x0587elfq502
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['.vercel.app','.now.sh','*']
 
 
 # Application definition
@@ -79,24 +79,35 @@ WSGI_APPLICATION = 'onlinemobilestore.wsgi.application'
 import os
 
 # Determine if the application is running on Vercel
-IS_VERCEL = 'VERCEL' in os.environ
+# IS_VERCEL = 'VERCEL' in os.environ
 
-if IS_VERCEL:
-    # Use the `/tmp` directory for SQLite database in Vercel environment
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join('/tmp', 'db.sqlite3'),
-        }
+# if IS_VERCEL:
+#     # Use the `/tmp` directory for SQLite database in Vercel environment
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join('/tmp', 'db.sqlite3'),
+#         }
+#     }
+# else:
+#     # Default SQLite configuration for local development
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         }
+#     }
+
+DATABASES = {
+     'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'store',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST':'localhost',
+        'PORT':'3306',
     }
-else:
-    # Default SQLite configuration for local development
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
+}
 
 
 # Password validation
@@ -133,7 +144,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+import os
+
+STATIC_URL = '/static/'
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
